@@ -1,0 +1,21 @@
+.modal-container {
+	background: #352c2d;
+	z-index: 2;
+	inset: 0;
+}
+
+.modal-container-main {
+	background: var(--bg-color);
+}
+
+.modal-container i {
+	color: var(--font-light);
+}
+
+.dis-none {
+	display: none;
+}
+
+.dis-flex {
+	display: flex;
+}

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./MenuBar.css";
 import logo from "../../assets/snkrs-logo.png";
 import { logoutUser } from "../../features/Auth/authSlice";
+import { openPostModal } from "../../features/Home/Modal/postModalSlice";
 import { useDispatch } from "react-redux";
 export function MenuBar() {
 	const dispatch = useDispatch();

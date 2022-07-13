@@ -33,18 +33,23 @@ export function Modal() {
 		dispatch(closePostModal());
 	};
 
+	const { user } = useSelector((state) => state.auth);
+
 	return (
 		<div className={`modal-container justify-center items-center fixed ${postModal ? "flex" : "hidden"}`}>
 			<div className='modal-container-main flex flex-col gap-4 p-4 rounded-xl w-1/4 md:w-4/5 '>
-				<div>
+				<div className='flex justify-between'>
+					<div className='flex items-center gap-4'>
+						<img src={user?.profilePic} className='h-8 rounded-full' alt={user?.userHandler} />
+						<p className='font-bold text-lg text-purple-600'>{user?.firstName}</p>
+					</div>
 					<i
-						className='text-2xl fa-solid fa-angle-left cursor-pointer'
+						className='text-2xl fa-solid fa-xmark cursor-pointer'
 						onClick={() => {
 							dispatch(closePostModal());
 							setInput("");
 						}}
 					/>
-					<i className='text-2xl fa-solid fa-circle-user ml-4' />
 				</div>
 				<div>
 					<textarea
@@ -58,9 +63,9 @@ export function Modal() {
 				<div className='bg-white rounded-lg px-1 py-1'>
 					<button
 						className={`px-4 py-1 w-full rounded-lg bg-violet-600 text-white font-bold hover:bg-violet-500  ${
-							input.length < 5 && "hover:cursor-not-allowed"
+							input.length < 1 && "hover:cursor-not-allowed"
 						}`}
-						disabled={input.length < 5 ? true : false}
+						disabled={input.length < 1 ? true : false}
 						onClick={() => postHandler()}>
 						Post
 					</button>

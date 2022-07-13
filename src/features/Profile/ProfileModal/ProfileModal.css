@@ -12,10 +12,10 @@
 	color: var(--font-light);
 }
 
-.dis-none {
+.display-none {
 	display: none;
 }
 
-.dis-flex {
+.display-flex {
 	display: flex;
 }

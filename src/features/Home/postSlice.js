@@ -1,5 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllPostService, getUserPostService, addPostService, deletePostService, editPostService } from "../../services";
+import {
+	getAllPostService,
+	getUserPostService,
+	addPostService,
+	deletePostService,
+	editPostService,
+	likePostService,
+	dislikePostService,
+} from "../../services";
 
 const initialState = {
 	allPosts: [],
@@ -48,6 +56,17 @@ export const deleteUserPost = createAsyncThunk("post/deleteUserPost", async (pos
 	try {
 		const token = localStorage.getItem("token");
 		const response = await deletePostService(postId, token);
+		return response.data;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
+export const likeAndDislikePost = createAsyncThunk("post/likeAndDislikePost", async ({ postId, isLike }, thunkAPI) => {
+	try {
+		const token = localStorage.getItem("token");
+		const response = isLike ? await likePostService(postId, token) : await dislikePostService(postId, token);
+		console.log(response);
 		return response.data;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error);
@@ -111,6 +130,17 @@ const postSlice = createSlice({
 			state.allPosts = action.payload.posts.reverse();
 		},
 		[deleteUserPost.rejected]: (state, action) => {
+			state.postStatus = "rejected";
+			state.allPosts = action.payload;
+		},
+		[likeAndDislikePost.pending]: (state) => {
+			state.postStatus = "pending";
+		},
+		[likeAndDislikePost.fulfilled]: (state, action) => {
+			state.postStatus = "fulfilled";
+			state.allPosts = action.payload.posts.reverse();
+		},
+		[likeAndDislikePost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
 			state.allPosts = action.payload;
 		},

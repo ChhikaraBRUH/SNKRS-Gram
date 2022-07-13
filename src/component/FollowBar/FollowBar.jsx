@@ -23,7 +23,7 @@ export function FollowBar() {
 				<div className='flex grow justify-between gap-1'>
 					<div>
 						<p className='font-semibold cursor-pointer'>Chaitanya Chhikara</p>
-						<p className='text-xs text-gray-400 '>@ChhikaraBRUH</p>
+						<p className='text-xs text-gray-400'>@ChhikaraBRUH</p>
 					</div>
 					<div className='items-center'>
 						<button className='font-semibold  cursor-pointer text-white bg-violet-600 p-1 rounded-2xl hover:opacity-80'>Follow</button>

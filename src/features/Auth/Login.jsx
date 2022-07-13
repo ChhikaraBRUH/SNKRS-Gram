@@ -16,7 +16,7 @@ export function Login() {
 
 	useEffect(() => {
 		(async () => {
-			if (loginForm.email && loginForm.password !== "") {
+			if (loginForm.email !== "" && loginForm.password !== "") {
 				await dispatch(loginUser(loginForm));
 			}
 		})();
@@ -36,6 +36,7 @@ export function Login() {
 	};
 
 	useEffect(() => token && navigate("/"), [token]);
+
 	return (
 		<div className='w-full h-screen text-gray-800  px-4 py-6 flex flex-col justify-center sm:py-12'>
 			<div className='w-2/5 py-3 sm:max-w-xl mx-auto text-center md:w-3/4'>
@@ -53,7 +54,7 @@ export function Login() {
 							<input
 								type='text'
 								placeholder='Username or Email'
-								className=' border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-violet-500 rounded-md'
+								className='border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-violet-500 rounded-md'
 								value={loginForm.email}
 								onChange={(e) => fillFormValue(e, "email")}
 								required
@@ -63,7 +64,7 @@ export function Login() {
 							<input
 								type='password'
 								placeholder='Password'
-								className=' border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-violet-500 rounded-md'
+								className='border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-violet-500 rounded-md'
 								value={loginForm.password}
 								onChange={(e) => fillFormValue(e, "password")}
 								required

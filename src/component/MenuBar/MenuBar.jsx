@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./MenuBar.css";
 import logo from "../../assets/snkrs-logo.png";
 import { logoutUser } from "../../features/Auth/authSlice";
+import { openPostModal } from "../../features/Home/Modal/postModalSlice";
 import { useDispatch } from "react-redux";
 export function MenuBar() {
 	const dispatch = useDispatch();
@@ -52,7 +53,11 @@ export function MenuBar() {
 					</li>
 
 					<li className='md:hidden'>
-						<button className='w-full cursor-pointer text-white bg-violet-600 font-bold rounded-2xl py-2 hover:opacity-80'>POST</button>
+						<button
+							className='w-full cursor-pointer text-white bg-violet-500 font-bold rounded-2xl py-2 hover:opacity-80'
+							onClick={() => dispatch(openPostModal())}>
+							POST
+						</button>
 					</li>
 				</main>
 			</div>

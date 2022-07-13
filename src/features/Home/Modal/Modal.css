@@ -1,19 +1,18 @@
-.modal-container{
-    background:rgba(52,46,46,.7490196078431373);
-    z-index: 1000;
-    inset: 0;
+.modal-container {
+	background: rgba(52, 46, 46, 0.7490196078431373);
+	z-index: 1000;
+	inset: 0;
 }
-.modal-container-main{
-   background: var(--bg-color);
+.modal-container-main {
+	background: var(--bg-color);
+}
+.modal-container i {
+	color: var(--font-light);
+}
+.display-none {
+	display: none;
+}
 
-}
-.modal-container i{
-    color:var(--font-light)
-}
-.dis-none{
-display: none;
-}
-
-.dis-flex{
-    display: flex;
+.display-flex {
+	display: flex;
 }

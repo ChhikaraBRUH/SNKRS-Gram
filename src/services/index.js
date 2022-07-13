@@ -1,5 +1,7 @@
 export { loginUserService, signUpService } from "./authService.js";
+
 export { updateUserService, getAllUserService } from "./userService.js";
+
 export {
 	getUserPostService,
 	getAllPostService,
@@ -9,3 +11,5 @@ export {
 	likePostService,
 	dislikePostService,
 } from "./postService.js";
+
+export { getAllBookmarkService, addBookmarkService, removeBookmarkService } from "./bookmarkService.js";

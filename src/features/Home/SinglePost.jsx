@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+
 import { openPostModal } from "./Modal/postModalSlice";
-import { deleteUserPost, likeAndDislikePost } from "./postSlice";
+import { deleteUserPost, likeAndDislikePost, addAndRemoveBookmark } from "./postSlice";
 export function SinglePost({ post }) {
 	const dispatch = useDispatch();
 	const [editModal, setEditModal] = useState(false);
@@ -13,10 +15,12 @@ export function SinglePost({ post }) {
 		content,
 		username,
 		likes: { likeCount, likedBy, dislikedBy },
+		bookmark,
 	} = post;
 
 	const userInfo = allUsers && allUsers?.find((user) => user.username === username);
 	const isLiked = likedBy?.some((like) => like.username === user.username);
+	const isBookmarked = bookmark?.some((bookmarkPost) => bookmarkPost.username === user.username);
 
 	const editHandler = () => {
 		dispatch(openPostModal(post));
@@ -24,6 +28,10 @@ export function SinglePost({ post }) {
 
 	const likeDislikeHandler = () => {
 		dispatch(likeAndDislikePost({ postId: _id, isLike: isLiked ? false : true }));
+	};
+
+	const addRemoveBookmarkHandler = () => {
+		dispatch(addAndRemoveBookmark({ postId: _id, isBookmark: isBookmarked ? false : true }));
 	};
 
 	return userInfo ? (
@@ -63,9 +71,10 @@ export function SinglePost({ post }) {
 						<i className={`fa ${isLiked ? "fa-heart" : "fa-heart-o"} mr-1 fa-solid`} />
 						<span className='text-gray-500'>{likeCount === 0 ? "Like" : `${likeCount} Likes`}</span>
 					</div>
-					<div className='cursor-pointer' title='Bookmark'>
-						<i className='fa fa-solid fa-bookmark-o mr-1' />
-						<span className='text-gray-500'>Bookmark</span>
+
+					<div className='cursor-pointer text-sm' title='Bookmark' onClick={() => addRemoveBookmarkHandler()}>
+						<i className={`fa fa-solid ${isBookmarked ? "fa-bookmark" : "fa-bookmark-o"} mr-1`} />
+						<span className='text-gray-500'>{isBookmarked ? "Bookmarked" : "Bookmark"}</span>
 					</div>
 				</div>
 

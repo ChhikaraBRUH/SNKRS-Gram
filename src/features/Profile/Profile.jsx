@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { updateUser } from "../Auth/authSlice";
 import { getUserPost } from "../Home/postSlice";
 import { SinglePost } from "../Home/SinglePost";
 import { openModal } from "./profileModalSlice";
@@ -8,10 +10,15 @@ export function Profile() {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 	const { userPosts, allPosts } = useSelector((state) => state.post);
+	const { allUsers } = useSelector((state) => state.user);
 
 	useEffect(() => {
 		dispatch(getUserPost(user.username));
 	}, [allPosts]);
+
+	useEffect(() => {
+		dispatch(updateUser(user.username));
+	}, [allUsers]);
 
 	return (
 		<div className={`profile-container w-2/4  md:w-full md:mx-4`}>
@@ -36,9 +43,9 @@ export function Profile() {
 					<p className='text-gray-500 font-semibold mb-2'>{user.bio}</p>
 
 					<div className='flex text-gray-500 font-semibold gap-8 mb-2 '>
-						<span>12 Posts</span>
-						<span>32 Followers</span>
-						<span>24 Following</span>
+						<span>{userPosts.length} Posts</span>
+						<span>{user.followers.length} Followers</span>
+						<span>{user.following.length} Following</span>
 					</div>
 
 					<div className='text-gray-500 text-xs font-semibold flex gap-4'>

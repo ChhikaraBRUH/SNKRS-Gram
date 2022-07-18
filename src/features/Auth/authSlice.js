@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginUserService, signUpService, updateUserService } from "../../services";
+import { toast } from "react-toastify";
 
 const initialState = {
 	token: localStorage.getItem("token") || null,
@@ -56,10 +57,12 @@ const authSlice = createSlice({
 			state.user = action.payload.foundUser;
 			localStorage.setItem("token", state.token);
 			localStorage.setItem("user", JSON.stringify(state.user));
+			toast.success("Login Successful!");
 		},
 		[loginUser.rejected]: (state, action) => {
 			state.authStatus = "Error";
 			state.error = action.payload;
+			toast.error("Login Failed!");
 		},
 		[signUpUser.pending]: (state) => {
 			state.authStatus = "pending";
@@ -70,10 +73,12 @@ const authSlice = createSlice({
 			state.user = action.payload.createdUser;
 			localStorage.setItem("token", state.token);
 			localStorage.setItem("user", JSON.stringify(state.user));
+			toast.success("Account Created Successfully!");
 		},
 		[signUpUser.rejected]: (state, action) => {
 			state.authStatus = "Error";
 			state.error = action.payload;
+			toast.error("Signup Failed!");
 		},
 		[updateUser.pending]: (state) => {
 			state.authStatus = "pending";

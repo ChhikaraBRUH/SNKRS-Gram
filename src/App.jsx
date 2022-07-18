@@ -8,7 +8,7 @@ import { MainContainer, NavBar } from "./component";
 import { PrivateRoute } from "./component/PrivateRoute/PrivateRoute";
 import { getAllPost, getUserPost } from "./features/Home/postSlice";
 import { getAllUser } from "./features/Profile/userSlice";
-import { Home, Modal, Profile, ProfileModal, Explore, Login, SignUp, Bookmark } from "./features";
+import { Home, Modal, Profile, ProfileModal, Explore, Login, SignUp, Bookmark, AnyProfile } from "./features";
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -63,6 +63,16 @@ export default function App() {
 							<PrivateRoute>
 								<MainContainer>
 									<Bookmark />
+								</MainContainer>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/user-profile/:userId'
+						element={
+							<PrivateRoute>
+								<MainContainer>
+									<AnyProfile />
 								</MainContainer>
 							</PrivateRoute>
 						}

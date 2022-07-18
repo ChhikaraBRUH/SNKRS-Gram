@@ -9,6 +9,9 @@ import {
 	dislikePostService,
 	addBookmarkService,
 	removeBookmarkService,
+	addCommentService,
+	editCommentService,
+	deleteCommentService,
 } from "../../services";
 
 const initialState = {
@@ -85,6 +88,36 @@ export const addAndRemoveBookmark = createAsyncThunk("post/addAndRemoveBookmark"
 	}
 });
 
+export const addComment = createAsyncThunk("post/addComment", async ({ postId, commentData }, thunkAPI) => {
+	try {
+		const token = localStorage.getItem("token");
+		const response = await addCommentService(postId, commentData, token);
+		return response.data;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
+export const editComment = createAsyncThunk("post/editComment", async ({ postId, commentId, commentData }, thunkAPI) => {
+	try {
+		const token = localStorage.getItem("token");
+		const response = await editCommentService(postId, commentId, commentData, token);
+		return response.data;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
+export const deleteComment = createAsyncThunk("post/deleteComment", async ({ postId, commentId }, thunkAPI) => {
+	try {
+		const token = localStorage.getItem("token");
+		const response = await deleteCommentService(postId, commentId, token);
+		return response.data;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
 const postSlice = createSlice({
 	name: "post",
 	initialState,
@@ -95,7 +128,7 @@ const postSlice = createSlice({
 		},
 		[getAllPost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[getAllPost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -106,7 +139,7 @@ const postSlice = createSlice({
 		},
 		[getUserPost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.userPosts = action.payload.posts.reverse();
+			state.userPosts = action.payload.posts;
 		},
 		[getUserPost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -117,7 +150,7 @@ const postSlice = createSlice({
 		},
 		[addUserPost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[addUserPost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -128,7 +161,7 @@ const postSlice = createSlice({
 		},
 		[editUserPost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[editUserPost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -139,7 +172,7 @@ const postSlice = createSlice({
 		},
 		[deleteUserPost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[deleteUserPost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -150,7 +183,7 @@ const postSlice = createSlice({
 		},
 		[likeAndDislikePost.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[likeAndDislikePost.rejected]: (state, action) => {
 			state.postStatus = "rejected";
@@ -161,9 +194,42 @@ const postSlice = createSlice({
 		},
 		[addAndRemoveBookmark.fulfilled]: (state, action) => {
 			state.postStatus = "fulfilled";
-			state.allPosts = action.payload.posts.reverse();
+			state.allPosts = action.payload.posts;
 		},
 		[addAndRemoveBookmark.rejected]: (state, action) => {
+			state.postStatus = "rejected";
+			state.allPosts = action.payload;
+		},
+		[addComment.pending]: (state) => {
+			state.postStatus = "pending";
+		},
+		[addComment.fulfilled]: (state, action) => {
+			state.postStatus = "fulfilled";
+			state.allPosts = action.payload.posts;
+		},
+		[addComment.rejected]: (state, action) => {
+			state.postStatus = "rejected";
+			state.allPosts = action.payload;
+		},
+		[editComment.pending]: (state) => {
+			state.postStatus = "pending";
+		},
+		[editComment.fulfilled]: (state, action) => {
+			state.postStatus = "fulfilled";
+			state.allPosts = action.payload.posts;
+		},
+		[editComment.rejected]: (state, action) => {
+			state.postStatus = "rejected";
+			state.allPosts = action.payload;
+		},
+		[deleteComment.pending]: (state) => {
+			state.postStatus = "pending";
+		},
+		[deleteComment.fulfilled]: (state, action) => {
+			state.postStatus = "fulfilled";
+			state.allPosts = action.payload.posts;
+		},
+		[deleteComment.rejected]: (state, action) => {
 			state.postStatus = "rejected";
 			state.allPosts = action.payload;
 		},

@@ -34,7 +34,7 @@ export function AnyProfile() {
 							<p className='text-sm text-gray-400 cursor-pointer'>@{singleUser.userHandler}</p>
 						</div>
 						<button
-							className='font-semibold h-8 cursor-pointer text-white bg-blue-400 pl-2 py-1 pr-3 rounded-2xl hover:opacity-80'
+							className='font-semibold h-8 cursor-pointer text-white bg-violet-500 pl-2 py-1 pr-3 rounded-2xl hover:opacity-80'
 							onClick={() =>
 								dispatch(
 									followUnFollowUser({
@@ -55,7 +55,7 @@ export function AnyProfile() {
 					</div>
 					<div className='text-gray-500 text-xs font-semibold flex gap-4'>
 						<div>
-							<a href={singleUser.link} className='text-blue-500 hover:underline decoration-1' target='_blank'>
+							<a href={singleUser.link} className='text-violet-600 hover:underline decoration-1' target='_blank'>
 								{singleUser.link}
 							</a>
 						</div>

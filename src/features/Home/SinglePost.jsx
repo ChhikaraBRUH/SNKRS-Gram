@@ -3,14 +3,17 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { Comment } from "./Comment";
 import { openPostModal } from "./Modal/postModalSlice";
-import { deleteUserPost, likeAndDislikePost, addAndRemoveBookmark } from "./postSlice";
+import { deleteUserPost, likeAndDislikePost, addAndRemoveBookmark, addComment } from "./postSlice";
 
 export function SinglePost({ post }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const [editModal, setEditModal] = useState(false);
+	const [comment, setComment] = useState("");
+
 	const { user } = useSelector((state) => state.auth);
 	const { allUsers } = useSelector((state) => state.user);
 	const {
@@ -19,6 +22,7 @@ export function SinglePost({ post }) {
 		username,
 		likes: { likeCount, likedBy, dislikedBy },
 		bookmark,
+		comments,
 	} = post;
 
 	const userInfo = allUsers && allUsers?.find((user) => user.username === username);
@@ -35,6 +39,11 @@ export function SinglePost({ post }) {
 
 	const addRemoveBookmarkHandler = () => {
 		dispatch(addAndRemoveBookmark({ postId: _id, isBookmark: isBookmarked ? false : true }));
+	};
+
+	const postHandler = () => {
+		dispatch(addComment({ postId: _id, commentData: comment }));
+		setComment("");
 	};
 
 	return userInfo ? (
@@ -84,12 +93,25 @@ export function SinglePost({ post }) {
 					</div>
 				</div>
 
-				<div className='home-comment flex gap-3 my-4'>
-					<i className='text-3xl fa-solid fa-circle-user cursor-pointer' />
+				<div className='home-comment flex gap-3 my-4 mt-8'>
+					<img src={user.profilePic} className='h-8 rounded-full  cursor-pointer' />
 					<div className='self-center border-solid border border-gray-400 grow flex space-between items-center rounded-md px-2 py-1'>
-						<input className='grow focus:outline-none' placeholder='Write your comment' />
-						<p className='text-sm text-violet-500 cursor-pointer font-semibold'>POST</p>
+						<input
+							className='grow focus:outline-none'
+							placeholder='Write your comment'
+							value={comment}
+							onChange={(e) => setComment(e.target.value)}
+						/>
+						<button
+							className={`text-sm text-violet-500 cursor-pointer font-semibold ${comment.trim().length < 1 && "hover:cursor-not-allowed"}`}
+							onClick={() => postHandler()}
+							disabled={comment.trim().length < 1 ? true : false}>
+							POST
+						</button>
 					</div>
+				</div>
+				<div className='flex flex-col-reverse gap-4'>
+					{comments.length > 0 && comments.map((comment) => <Comment key={comment._id} comment={comment} postId={_id} />)}
 				</div>
 			</div>
 		</div>

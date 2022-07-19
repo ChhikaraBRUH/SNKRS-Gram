@@ -18,6 +18,26 @@ export const posts = [
 		},
 		username: "adarshbalika@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "chaitanya@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "guest1@gmail.com",
+				text: "Let's go to the moon!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -32,6 +52,26 @@ export const posts = [
 		},
 		username: "guest1@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "chaitanya@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "guest2@gmail.com",
+				text: "Let's go to the moon!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -46,6 +86,17 @@ export const posts = [
 		},
 		username: "chaitanya@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "guest1@gmail.com",
+				text: "Let's go to the moon!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -60,6 +111,7 @@ export const posts = [
 		},
 		username: "guest2@gmail.com",
 		bookmark: [],
+		comments: [],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -74,6 +126,17 @@ export const posts = [
 		},
 		username: "chaitanya@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "guest5@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -88,6 +151,35 @@ export const posts = [
 		},
 		username: "guest3@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "guest4@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "chaitanya@gmail.com",
+				text: "Let's go to the moon!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "guest2@gmail.com",
+				text: "Lesssssssss goooooooooooo!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -102,6 +194,17 @@ export const posts = [
 		},
 		username: "guest4@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "guest5@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -116,6 +219,7 @@ export const posts = [
 		},
 		username: "guest5@gmail.com",
 		bookmark: [],
+		comments: [],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},
@@ -130,6 +234,35 @@ export const posts = [
 		},
 		username: "guest1@gmail.com",
 		bookmark: [],
+		comments: [
+			{
+				_id: uuid(),
+				username: "guest5@gmail.com",
+				text: "This is soooooo interesting.",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "guest3@gmail.com",
+				text: "Let's go to the moon!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+			{
+				_id: uuid(),
+				username: "guest4@gmail.com",
+				text: "Letsssss gooooooooooo!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+			},
+		],
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 	},

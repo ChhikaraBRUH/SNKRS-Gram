@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { followUnFollowUser } from "../../features/Profile/userSlice";
 
 export function FollowBar() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const { user } = useSelector((state) => state.auth);
 	const { allUsers } = useSelector((state) => state.user);
 	const [suggestion, setSuggestion] = useState([]);
@@ -23,16 +27,27 @@ export function FollowBar() {
 			{suggestion.length > 0 ? (
 				suggestion.map((suggestUser) => (
 					<div key={suggestUser._id} className='flex items-star  border-solid border-t-2 border-gray-300 py-4'>
-						<img src={suggestUser.profilePic} className='h-8 rounded-full self-center' />
+						<img
+							src={suggestUser.profilePic}
+							className='h-8 rounded-full self-center cursor-pointer'
+							onClick={() => navigate(`/user-profile/${suggestUser?.userHandler}`)}
+						/>
 
 						<div className='flex grow justify-between ml-1'>
 							<div>
-								<p className='font-semibold cursor-pointer'>{`${suggestUser.firstName} ${suggestUser.lastName}`}</p>
-								<p className='text-xs text-gray-400 '>{suggestUser.userHandler}</p>
+								<p
+									className='font-semibold cursor-pointer'
+									onClick={() =>
+										navigate(`/user-profile/${suggestUser?.userHandler}`)
+									}>{`${suggestUser.firstName} ${suggestUser.lastName}`}</p>
+
+								<p className='text-xs text-gray-400 cursor-pointer' onClick={() => navigate(`/user-profile/${suggestUser?.userHandler}`)}>
+									{suggestUser.userHandler}
+								</p>
 							</div>
 							<div className='items-center'>
 								<button
-									className='font-semibold  cursor-pointer text-white bg-blue-400 pl-2 py-1 pr-3 rounded-2xl hover:opacity-80'
+									className='font-semibold  cursor-pointer text-white bg-violet-500 pl-2 py-1 pr-3 rounded-2xl hover:opacity-80'
 									onClick={() =>
 										dispatch(
 											followUnFollowUser({
@@ -50,7 +65,7 @@ export function FollowBar() {
 				))
 			) : (
 				<div className='border-solid border-t-2 border-gray-300 py-4'>
-					<p className='font-semibold text-center'>No Suggestions</p>
+					<p className='font-semibold text-center'>No More Suggestions!</p>
 				</div>
 			)}
 		</div>

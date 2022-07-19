@@ -13,3 +13,5 @@ export {
 } from "./postService.js";
 
 export { getAllBookmarkService, addBookmarkService, removeBookmarkService } from "./bookmarkService.js";
+
+export { addCommentService, editCommentService, deleteCommentService } from "./commentService.js";

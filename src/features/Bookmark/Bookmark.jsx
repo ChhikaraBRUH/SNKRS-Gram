@@ -15,6 +15,11 @@ export function Bookmark() {
 
 	return (
 		<div className='w-2/4  md:w-full md:mx-4'>
+			<div
+				className='home-input bg-white
+         px-4 py-3 rounded-xl gap-4 mb-8 text-center border-b-2 border-violet-500 font-semibold'>
+				BOOKMARKS
+			</div>
 			<div className='flex flex-col gap-6'>
 				{bookmark.length > 0 ? (
 					bookmark.map((post) => <SinglePost key={post._id} post={post} />)

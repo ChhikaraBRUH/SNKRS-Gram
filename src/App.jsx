@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./App.css";
 
 import { MainContainer, NavBar } from "./component";
@@ -26,6 +29,17 @@ export default function App() {
 		<div className='container relative mx-auto'>
 			<Router>
 				<NavBar />
+				<ToastContainer
+					position='top-right'
+					autoClose={1500}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 				<Routes>
 					<Route
 						path='/'
